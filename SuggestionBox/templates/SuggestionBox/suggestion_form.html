@@ -1,0 +1,25 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'SuggestionBox/style.css' %}">
+
+<div class="container">
+    <h1>Submit Anonymous Feedback</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="id_category">Category </label>
+        <select name="category" id="id_category">
+            <option value="general">General suggestion </option>
+            <option value="academic">Academic Concern</option>
+            <option value="facilities">Facilities Improvement</option>
+        </select>
+        
+        <p>Type your suggestion, concern or idea here </p>
+        <textarea name="content" placeholder="Type here..." required></textarea>
+        
+        <button type="submit" class="btn">SUBMIT</button>
+    </form>
+
+    <p><small>Your feedback is anonymous. We do not collect names, emails, or student numbers.</small></p>
+    <div class="footer-text">Your voice matters. Speak freely </div>
+</div>

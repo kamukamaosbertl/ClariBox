@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClariBox | Admin Login</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/auth.css' %}">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Admin Login</h2>
+
+            {% if form.errors %}
+                <div>
+                    <strong>Invalid Credentials:</strong> Please check your username and password and try again.
+                </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+
+                <button type="submit" class="auth-btn">Login to Dashboard</button>
+            </form>
+
+            <div class="switch-link">
+                <p>© 2026 ClariBox Secure Admin Portal</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

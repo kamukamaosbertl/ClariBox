@@ -1,0 +1,11 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'SuggestionBox/style.css' %}">
+<div class="container">
+    <h1>ClariBox</h1>
+    <p>Have something to say but don't know where to speak? </p>
+    <p><strong>Your identity is never collected or stored. </strong></p>
+    <a href="{% url 'submit_feedback' %}" class="btn">SUBMIT YOUR SUGGESTION TODAY </a>
+    <div class="footer-text">Your voice matters. Speak freely 
+        
+    </div>
+</div>

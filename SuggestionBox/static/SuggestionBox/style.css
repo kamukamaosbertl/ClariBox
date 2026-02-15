@@ -1,0 +1,126 @@
+/* General Layout & Background */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; /* Soft light background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Typography matching ClariBox branding */
+h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Success Title - This fixes the yellow line issue */
+.success-title {
+    color: #28a745; /* Professional green [cite: 26] */
+    font-weight: bold;
+}
+
+p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Form Elements */
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+/* Select Dropdown Styling [cite: 17, 18] */
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+select:focus {
+    border-color: #6c63ff;
+}
+
+/* Textarea for suggestions [cite: 19] */
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    resize: none;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+/* Buttons [cite: 10, 22, 27] */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #6c63ff; /* ClariBox Primary Purple */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-bottom: 10px;
+}
+
+.btn:hover {
+    background-color: #574bda;
+}
+
+/* Exit/Back button style [cite: 28] */
+.exit-btn {
+    background-color: #6c757d;
+}
+
+.exit-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Helpline styling [cite: 35] */
+.helpline-number {
+    color: #d9534f;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+/* Footer [cite: 12, 23, 30, 38] */
+.footer-text {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-style: italic;
+    color: #888;
+}

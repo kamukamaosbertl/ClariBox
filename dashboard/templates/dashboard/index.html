@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ClariBox Dashboard</title>
+<link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-box">LOGO</div>
+            <h2>ClariBox</h2>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="{% url 'ai_assistant' %}">AI Assistant</a></li>
+                <li class="active">Dashboard</li>
+                <li>Category Insights</li>
+                <li>Reports</li>
+                <li>Settings</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- HEADER SECTION -->
+        <section class="header-section">
+            <div class="header-text">
+                <h1>Need a detailed Summary?</h1>
+                <p>Monitor feedback trends and alerts in real time</p>
+            </div>
+
+            <div class="admin-bar">
+                Welcome, <strong>{{ user.username }}</strong>
+            </div>
+        </section>
+
+        <!-- ASK BOT -->
+        <section class="askbot">
+            <div>
+                <h3>Need a detailed summary?</h3>
+                <p>Ask ClariBot for a full analysis of recent feedback</p>
+            </div>
+            <button>Ask ClariBot</button>
+        </section>
+
+        <!-- STATS -->
+        <section class="stats">
+
+            <div class="card">
+                <p>Total Feedback</p>
+                <h2>{{ total_feedback }}</h2>
+            </div>
+
+            <div class="card">
+                <p>Top Category</p>
+                <h2>{{ top_category_percentage }}%</h2>
+            </div>
+
+        </section>
+
+        <!-- ALERTS -->
+        <section class="alerts">
+            <h3>Recent Alerts</h3>
+
+                {% for alert in recent_alerts %}
+                <div class="alert-card">
+                    <div class="alert-info">
+                        <span class="warning">⚠</span>
+                        <div>
+                            <h4>{{ alert.category }}</h4>
+                            <p>{{ alert.count }} reports</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+        <!-- HELPER -->
+        <section class="helper">
+            Need recommendations? Ask ClariBot — it's here to help.
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

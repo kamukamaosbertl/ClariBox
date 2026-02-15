@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ClariBot AI Assistant</title>
+<link rel="stylesheet" href="{% static 'dashboard/ai.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo">ClariBox</h2>
+        <ul>
+            <li class="active">AI Assistant</li>
+            <li>Dashboard</li>
+            <li>Category Insights</li>
+            <li>Reports</li>
+            <li>Settings</li>
+        </ul>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- Header -->
+        <header class="topbar">
+            <h3><p>Welcome to your AI Assistant today, ClariBot.<br>
+Ask ClariBot to summarize and analyze anonymous feedback from the community.</p></h3>
+        </header>
+
+        <!-- Time Filters -->
+        <div class="filters">
+            <button class="filter-btn">Last 7 Days</button>
+            <button class="filter-btn">Last 30 Days</button>
+            <button class="filter-btn">Last Semester</button>
+        </div>
+
+        <!-- Chat Window -->
+        <div class="chat-container" id="chatContainer">
+
+            <div class="message bot">
+                👋 Hi! Ask me about feedback insights, complaints, or trends.
+            </div>
+
+        </div>
+
+        <!-- Input -->
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Ask ClariBot anything..." />
+            <button onclick="sendMessage()">➤</button>
+        </div>
+
+    </main>
+</div>
+
+<script>
+function sendMessage() {
+
+    let input = document.getElementById("userInput");
+    let chat = document.getElementById("chatContainer");
+
+    if(input.value.trim() === "") return;
+
+    // user message
+    let userMsg = document.createElement("div");
+    userMsg.className = "message user";
+    userMsg.innerText = input.value;
+    chat.appendChild(userMsg);
+
+    // fake AI response
+    let botMsg = document.createElement("div");
+    botMsg.className = "message bot";
+    botMsg.innerText = "Analyzing feedback... (connect Django AI backend later)";
+    chat.appendChild(botMsg);
+
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>
