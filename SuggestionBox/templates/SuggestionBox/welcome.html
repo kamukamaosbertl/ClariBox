@@ -1,11 +1,22 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'SuggestionBox/style.css' %}">
+{% load socialaccount %} <link rel="stylesheet" href="{% static 'SuggestionBox/style.css' %}">
+
 <div class="container">
     <h1>ClariBox</h1>
-    <p>Have something to say but don't know where to speak? </p>
-    <p><strong>Your identity is never collected or stored. </strong></p>
-    <a href="{% url 'submit_feedback' %}" class="btn">SUBMIT YOUR SUGGESTION TODAY </a>
-    <div class="footer-text">Your voice matters. Speak freely 
-        
+    <p>Have something to say but don't know where to speak?</p>
+    
+    <div>
+        <p><strong>🔒 Identity Protection Active</strong></p>
+        <p><small>We use Google to verify you are a MUST student. Your email is <strong>never</strong> stored with your suggestion and your session is destroyed immediately after submission.</small></p>
+    </div>
+
+    <a href="{% provider_login_url 'google' process='login' %}" class="btn">
+        VERIFY WITH MUST EMAIL & SUBMIT
+    </a>
+
+    <div class="footer-text">
+        Your voice matters. Speak freely.
+        <br>
+        <a href="{% url 'helpline' %}" >Need urgent help? Click here.</a>
     </div>
 </div>

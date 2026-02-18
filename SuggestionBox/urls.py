@@ -1,14 +1,15 @@
 from django.urls import path
+from django.contrib.auth.decorators import login_required # The Gatekeeper
 from . import views
 
 urlpatterns = [
-    # This makes 'http://127.0.0.1:8000/' show your Welcome page
+    # Public pages
     path('', views.welcome, name='welcome'), 
-    
-    # This makes 'http://127.0.0.1:8000/submit/' show the feedback form
-    path('submit/', views.submit_feedback, name='submit_feedback'), 
-    
-    # These match the other pages in your ClariBox flow
-    path('success/', views.success_page, name='success_page'),
     path('helpline/', views.helpline, name='helpline'),
+    
+    # Protected page - Login is forced here
+    path('submit/', login_required(views.submit_feedback), name='submit_feedback'), 
+    
+    # Post-submission pages
+    path('success/', views.success_page, name='success_page'),
 ]

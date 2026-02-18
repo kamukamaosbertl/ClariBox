@@ -38,9 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    # allauth apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     #my app
     'SuggestionBox',
     'dashboard',
+]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'claribox.urls'
@@ -128,6 +139,80 @@ STATICFILES_DIRS = [
 
 # Authentication Redirects
 # This tells Django where to go after logging in or out
-LOGIN_REDIRECT_URL = 'admin_dashboard'
-LOGOUT_REDIRECT_URL = 'login'
-LOGIN_URL = 'login'
+#LOGIN_REDIRECT_URL = 'admin_dashboard'
+#LOGOUT_REDIRECT_URL = 'login'
+#LOGIN_URL = 'login'
+
+
+
+
+# Site ID is required by django-allauth
+SITE_ID = 1
+
+# Google OAuth2 Settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+            'hd': 'std.must.ac.ug',  # university domain
+        }
+    }
+}
+
+# Ensure the email is captured
+# Modern Django 6.0 / Allauth syntax
+ACCOUNT_SIGNUP_FIELDS = ['email']
+ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_EMAIL_VERIFICATION = 'none' 
+
+# Google already verified the email
+
+
+# Update your Authentication Redirects
+LOGIN_REDIRECT_URL = '/submit/' # Redirect to suggestion form after Google Login
+LOGOUT_REDIRECT_URL = 'welcome'
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+
+# Session lasts for 600 seconds (10 minutes) of inactivity
+SESSION_COOKIE_AGE =300 
+
+# Ensures the session is wiped if the student closes the browser
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# If the 10 mins are up, send them back to the Google Login, not the Admin
+# --- FINAL REDIRECT LOGIC ---
+LOGIN_URL = '/accounts/google/login/'
+LOGIN_REDIRECT_URL = '/submit/'
+LOGOUT_REDIRECT_URL = 'welcome'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'welcome'
+# This ensures that when a user is deleted/logged out, 
+# the next person (or the same person) gets a fresh, working security token.
+
+CSRF_USE_SESSIONS = False  
+CSRF_COOKIE_HTTPONLY = False
+
+# --- BYPASS UGLY INTERFACES & AUTOMATE LOGIN ---
+SOCIALACCOUNT_AUTO_SIGNUP = True  # Bypasses the "Sign up" form page
+ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
+
+# If a record already exists for the email, just link and log in silently
+SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+
+# This handles the "A user with that username already exists" error
+# by generating a random username if there is a conflict
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+
+# Trust local development for the security handshake
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+]
