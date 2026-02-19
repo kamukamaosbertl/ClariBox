@@ -178,3 +178,13 @@ textarea {
     padding: 10px;
     border-radius: 5px;
 }
+/* Hides the logout frame from view */
+.hidden-shredder {
+    display: none;
+}
+
+/* Red style for the exit button */
+.exit-btn {
+    background-color: #d9534f;
+    color: white;
+}

@@ -185,7 +185,11 @@ SESSION_COOKIE_AGE =300
 # Ensures the session is wiped if the student closes the browser
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+# Ensures the session is saved/updated on every request so the 5 mins resets while they type
+SESSION_SAVE_EVERY_REQUEST = True
 # If the 10 mins are up, send them back to the Google Login, not the Admin
+# Tells Django where to send people who are NOT logged in
+LOGIN_URL = 'welcome'
 # --- FINAL REDIRECT LOGIC ---
 LOGIN_URL = '/accounts/google/login/'
 LOGIN_REDIRECT_URL = '/submit/'

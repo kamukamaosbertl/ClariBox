@@ -37,18 +37,19 @@ def submit_feedback(request):
         # 3. Capture the user to delete
         user_to_shred = request.user
         
-        # 4. LOGOUT (Ends the session safely)
+        # 4. LOGOUT (Ends the Django session safely)
         logout(request)
         
-        # 5. DELETE (Removes the evidence)
+        # 5. DELETE (Removes the evidence from Database)
         if not user_to_shred.is_superuser:
             user_to_shred.delete()
             
+        # REDIRECT DIRECTLY: This avoids the Google "Redirect Notice" screen.
         return redirect('success_page')
     
     return render(request, 'SuggestionBox/suggestion_form.html')
 
-# 3. Success page (The missing piece that was causing your error)
+# 3. Success page
 def success_page(request):
     return render(request, 'SuggestionBox/success.html')
 

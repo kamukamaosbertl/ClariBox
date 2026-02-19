@@ -1,10 +1,27 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'SuggestionBox/style.css' %}">
+
 <div class="container">
     <h1>Feedback Submitted successfully!</h1>
-    <p>Thank you for sharing your feedback. Your voice helps improve the institution. </p>
-    <p>Rate us out of 5 </p>
+    <p>Thank you for sharing your feedback. Your voice helps improve the institution.</p>
+    <p>Rate us out of 5</p>
+    
     <a href="{% url 'submit_feedback' %}" class="btn">SUBMIT ANOTHER SUGGESTION</a>
-    <a href="{% url 'welcome' %}" class="btn exit-btn">EXIT </a>
-    <div class="footer-text">Your voice matters. Speak freely </div>
+    <a href="{% url 'welcome' %}" class="btn exit-btn">EXIT</a>
+    
+    <div class="footer-text">Your voice matters. Speak freely</div>
 </div>
+
+
+
+<script>
+    // 2. Clear local browser cache and session data immediately
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // 3. Optional: Prevent "Back" button from returning to the form
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+        window.history.pushState(null, "", window.location.href);
+    };
+</script>
